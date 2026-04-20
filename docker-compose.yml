@@ -1,8 +1,12 @@
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:16-alpine
     env_file:
       - src/.env
+    environment:
+      POSTGRES_USER: ${DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      POSTGRES_DB: ${DATABASE_NAME:-data_lineage_tracker}
     ports:
       - "5432:5432"
     volumes:
