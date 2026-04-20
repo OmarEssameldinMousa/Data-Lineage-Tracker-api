@@ -1,0 +1,9 @@
+FastAPI
+uvicorn
+sqlalchemy
+psycopg2-binary
+asyncpg
+alembic
+pydantic-settings
+httpx
+pytest
