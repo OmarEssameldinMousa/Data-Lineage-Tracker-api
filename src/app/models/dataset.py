@@ -12,14 +12,14 @@ class Dataset(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     upstream_edges: Mapped[list["LineageEdge"]] = relationship(
         "LineageEdge",
-        foreign_keys=lambda: [LineageEdge.downstream_id],
+        foreign_keys="[LineageEdge.downstream_id]",
         back_populates="downstream_dataset",
         cascade="all, delete-orphan"
     )
 
     downstream_edges: Mapped[list["LineageEdge"]] = relationship(
         "LineageEdge",
-        foreign_keys=lambda: [LineageEdge.upstream_id],
+        foreign_keys="[LineageEdge.upstream_id]",
         back_populates="upstream_dataset",
         cascade="all, delete-orphan"
     )

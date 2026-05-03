@@ -13,11 +13,17 @@ class Settings(BaseSettings):
     DATABASE_USER: str = "user"
     DATABASE_PASSWORD: str = "password"
     DATABASE_NAME: str = "dbname"
+    TEST_DATABASE_NAME: str = "test_dbname"
 
     @computed_field
     @property
     def DATABASE_URL(self) -> str:
         return f"postgresql+asyncpg://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
+
+    @computed_field
+    @property
+    def TEST_DATABASE_URL(self) -> str:
+        return f"postgresql+asyncpg://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.TEST_DATABASE_NAME}"
 
     model_config = SettingsConfigDict(
         env_file=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"), 

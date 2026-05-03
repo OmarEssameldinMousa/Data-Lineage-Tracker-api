@@ -1,0 +1,1 @@
+docker compose exec postgres psql -U postgres -c "CREATE DATABASE data_lineage_tracker_test;"
