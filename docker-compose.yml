@@ -11,8 +11,13 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  schema_validator_api:
+  data_lineage_tracker_api:
     build: 
       context: ./src
       dockerfile: Dockerfile
